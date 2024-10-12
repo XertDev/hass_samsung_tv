@@ -1,0 +1,22 @@
+{
+  "config": {
+    "flow_title": "Samsung TV - new device",
+    "step": {
+      "user": {
+        "description": "Enter your Samsung TV information. It will be required to confirm popup on tv screen to finish configuration.",
+        "data": {
+          "host": "TV's hostname or IP",
+          "name": "TV name (provided by user)",
+          "polling_rate": "Polling rate (how often integration will try to update tv data)"
+        },
+        "data_description": {
+          "host": "The hostname or IP address of your TV."
+        }
+      }
+    },
+    "error": {
+      "connection_failed": "Failed to connect to your TV.",
+      "authentication_failed": "Authentication failed. Please check if your device is turned on."
+    }
+  }
+}

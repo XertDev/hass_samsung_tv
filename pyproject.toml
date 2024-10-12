@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "hass-samsung-tv"
+version = "0.1.0"
+description = ""
+authors = ["Xert <xertdev@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.12,<3.13"
+websocket-client = "^1.8.0"
+samsungtvws = "^2.6.0"
+
+[tool.poetry.dev-dependencies]
+homeassistant = "^2024.8.3"
+getmac = "0.9.5"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

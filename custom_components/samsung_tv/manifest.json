@@ -1,0 +1,19 @@
+{
+  "domain": "samsung_tv",
+  "name": "Samsung TV",
+  "documentation": "",
+  "config_flow": true,
+  "integration_type": "device",
+  "iot_class": "cloud_polling",
+  "requirements": [
+    "getmac==0.9.5"
+  ],
+  "ssdp": [],
+  "zeroconf": [],
+  "homekit": {},
+  "dependencies": [
+    "http"
+  ],
+  "codeowners": ["@XertDev"],
+  "version": "0.1"
+}
