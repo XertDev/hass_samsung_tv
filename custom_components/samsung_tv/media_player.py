@@ -7,6 +7,7 @@ from .device import SamsungDevice
 from .coordinator import SamsungCoordinator
 from .entity import SamsungEntity
 from .const import BASE_PLAYER_SUPPORTED_FEATURES
+from .const import KEY_MUTE, KEY_VOLUME_UP, KEY_VOLUME_DOWN
 
 
 async def async_setup_entry(
@@ -54,3 +55,15 @@ class SamsungMediaPlayer(SamsungEntity, MediaPlayerEntity):
     async def async_toggle(self) -> None:
         device: SamsungDevice = self.coordinator.device
         await device.async_toggle()
+
+    async def async_mute_volume(self, mute: bool) -> None:
+        device: SamsungDevice = self.coordinator.device
+        await device.async_click_key(KEY_MUTE)
+
+    async def async_volume_up(self) -> None:
+        device: SamsungDevice = self.coordinator.device
+        await device.async_click_key(KEY_VOLUME_UP)
+
+    async def async_volume_down(self) -> None:
+        device: SamsungDevice = self.coordinator.device
+        await device.async_click_key(KEY_VOLUME_DOWN)
