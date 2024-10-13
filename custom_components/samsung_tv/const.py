@@ -17,6 +17,8 @@ KEY_POWER = "KEY_POWER"
 KEY_MUTE = "KEY_MUTE"
 KEY_VOLUME_UP = "KEY_VOLUP"
 KEY_VOLUME_DOWN = "KEY_VOLDOWN"
+KEY_PLAY = "KEY_PLAY"
+KEY_PAUSE = "KEY_PAUSE"
 
 DEFAULT_POLLING_RATE = 10
 
@@ -28,4 +30,6 @@ BASE_PLAYER_SUPPORTED_FEATURES = (
     | MediaPlayerEntityFeature.TURN_ON
     | MediaPlayerEntityFeature.VOLUME_MUTE
     | MediaPlayerEntityFeature.VOLUME_STEP
+    | MediaPlayerEntityFeature.PAUSE
+    | MediaPlayerEntityFeature.PLAY
 )

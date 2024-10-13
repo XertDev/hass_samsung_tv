@@ -188,6 +188,7 @@ class SamsungDevice:
     async def _async_send_ws_message(self, message: str):
         if self._websocket is None or self._websocket.closed:
             await self._async_connect_ws()
+        _LOGGING.debug(f"Sending ws message: {message}")
         await self._websocket.send_str(message)
 
     async def async_click_key(self, key: str):

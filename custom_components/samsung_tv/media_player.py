@@ -7,7 +7,7 @@ from .device import SamsungDevice
 from .coordinator import SamsungCoordinator
 from .entity import SamsungEntity
 from .const import BASE_PLAYER_SUPPORTED_FEATURES
-from .const import KEY_MUTE, KEY_VOLUME_UP, KEY_VOLUME_DOWN
+from .const import KEY_MUTE, KEY_VOLUME_UP, KEY_VOLUME_DOWN, KEY_PLAY, KEY_PAUSE, KEY_PLAY_PAUSE
 
 
 async def async_setup_entry(
@@ -22,10 +22,12 @@ async def async_setup_entry(
 
 class SamsungMediaPlayer(SamsungEntity, MediaPlayerEntity):
     _attr_device_class = MediaPlayerDeviceClass.TV
+    _pause: bool
 
     def __init__(self, coordinator: SamsungCoordinator):
         super().__init__(coordinator=coordinator)
 
+        self._pause = True
         self._attr_supported_features = BASE_PLAYER_SUPPORTED_FEATURES
 
     @callback
@@ -33,13 +35,11 @@ class SamsungMediaPlayer(SamsungEntity, MediaPlayerEntity):
         device = self.coordinator.device
         if device.is_on:
             if device.running_app:
-                self._attr_state = MediaPlayerState.PLAYING
                 if device.running_app:
                     self._attr_app_name = device.running_app
                 else:
                     self._attr_app_name = None
-            else:
-                self._attr_state = MediaPlayerState.ON
+            self._attr_state = MediaPlayerState.ON
         else:
             self._attr_state = MediaPlayerState.OFF
         self.async_write_ha_state()
@@ -67,3 +67,19 @@ class SamsungMediaPlayer(SamsungEntity, MediaPlayerEntity):
     async def async_volume_down(self) -> None:
         device: SamsungDevice = self.coordinator.device
         await device.async_click_key(KEY_VOLUME_DOWN)
+
+    async def async_media_play(self) -> None:
+        device: SamsungDevice = self.coordinator.device
+        await device.async_click_key(KEY_PLAY)
+
+    async def async_media_pause(self) -> None:
+        device: SamsungDevice = self.coordinator.device
+        await device.async_click_key(KEY_PAUSE)
+
+    async def async_media_play_pause(self) -> None:
+        if self._pause:
+            await self.async_media_play()
+            self._pause = False
+        else:
+            await self.async_media_pause()
+            self._pause = True
