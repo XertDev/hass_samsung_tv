@@ -7,7 +7,7 @@ from .device import SamsungDevice
 from .coordinator import SamsungCoordinator
 from .entity import SamsungEntity
 from .const import BASE_PLAYER_SUPPORTED_FEATURES
-from .const import KEY_MUTE, KEY_VOLUME_UP, KEY_VOLUME_DOWN, KEY_PLAY, KEY_PAUSE, KEY_PLAY_PAUSE
+from .const import KEY_MUTE, KEY_VOLUME_UP, KEY_VOLUME_DOWN, KEY_PLAY, KEY_PAUSE
 
 
 async def async_setup_entry(

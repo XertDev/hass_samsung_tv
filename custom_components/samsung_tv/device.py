@@ -24,6 +24,7 @@ _LOGGING = logging.getLogger(__name__)
 
 
 class PowerState(enum.Enum):
+    OFF = ""
     STANDBY = "standby"
     ON = "on"
 
