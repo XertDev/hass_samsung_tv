@@ -7,7 +7,7 @@ from .const import CONF_POLLING_RATE
 from .coordinator import SamsungCoordinator
 from .device import SamsungDevice
 
-PLATFORMS = [Platform.MEDIA_PLAYER]
+PLATFORMS = [Platform.MEDIA_PLAYER, Platform.REMOTE]
 
 type SamsungConfigEntry = ConfigEntry[SamsungCoordinator]
 
