@@ -1,4 +1,4 @@
-from homeassistant.components.media_player import MediaPlayerEntity, MediaPlayerState
+from homeassistant.components.media_player import MediaPlayerEntity, MediaPlayerState, MediaPlayerDeviceClass
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
@@ -20,6 +20,8 @@ async def async_setup_entry(
 
 
 class SamsungMediaPlayer(SamsungEntity, MediaPlayerEntity):
+    _attr_device_class = MediaPlayerDeviceClass.TV
+
     def __init__(self, coordinator: SamsungCoordinator):
         super().__init__(coordinator=coordinator)
 
