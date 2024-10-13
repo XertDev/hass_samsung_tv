@@ -1,4 +1,4 @@
-from homeassistant.const import CONF_NAME, CONF_HOST, Platform
+from homeassistant.const import CONF_NAME, CONF_HOST, Platform, EVENT_HOMEASSISTANT_STOP
 from homeassistant.core import HomeAssistant
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.helpers.aiohttp_client import async_create_clientsession
@@ -21,6 +21,14 @@ async def async_setup_entry(hass: HomeAssistant, entry: SamsungConfigEntry) -> b
 
     entry.runtime_data = samsung_coordinator
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
+
+    async def stop_device(event=None) -> None:
+        await samsung_device.async_close()
+
+    entry.async_on_unload(
+        hass.bus.async_listen_once(EVENT_HOMEASSISTANT_STOP, stop_device),
+    )
+    entry.async_on_unload(stop_device)
 
     return True
 

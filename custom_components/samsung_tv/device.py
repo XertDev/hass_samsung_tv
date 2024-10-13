@@ -133,6 +133,10 @@ class SamsungDevice:
             return
 
         self._connected = asyncio.Event()
+
+        if self._hass.is_stopping:
+            return
+
         self._hass.loop.create_task(self._async_handle_ws())
 
         connection_timeout = WAIT_FOR_CONNECTION_TIMEOUT+WAIT_FOR_AUTH_TIMEOUT
@@ -211,6 +215,11 @@ class SamsungDevice:
 
     async def async_toggle(self):
         await self.async_click_key(KEY_POWER)
+
+    async def async_close(self):
+        if self._websocket is not None and self._websocket.closed:
+            self._websocket.close()
+            self._websocket = None
 
     async def fetch_mac(self) -> str:
         if self._device_state is None:
